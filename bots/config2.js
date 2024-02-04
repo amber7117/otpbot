@@ -1,20 +1,12 @@
 const admin = require('firebase-admin');
 const serviceAccount = require('./serviceAccountKey.json');
 
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
-
-const connection = admin.firestore();
-
-
 module.exports = {
     apiurl: 'http://localhost:1337',
     apipassword: '',
 
     // Telegram Bot Configuration
-    botToken: '6741236105:AAGDjLFF_gBX4aP3JVMgrn6RvQO_0ty5mTY',
+    telegramtoken: '6741236105:AAGEQdSHEfnCzoUd-B3JaQCaVLEiX45SfIY',
     telegramprefix: '!',
 
     // This can be used if your bot needs a secret password for some functionalities
@@ -29,9 +21,6 @@ module.exports = {
         user: "otp",
         password: "5252Meimei",
         database: "otp"
-    },
-	
-	db: connection
-	
+    }
 	
 };

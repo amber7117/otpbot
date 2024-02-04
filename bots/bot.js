@@ -1,1 +1,97 @@
-const _0x1ce82b=_0x436d;(function(_0x428e37,_0x10f6e){const _0x5c1394=_0x436d,_0x2e58b3=_0x428e37();while(!![]){try{const _0x24d473=parseInt(_0x5c1394(0x110))/0x1*(-parseInt(_0x5c1394(0xfd))/0x2)+parseInt(_0x5c1394(0x103))/0x3+-parseInt(_0x5c1394(0x111))/0x4*(-parseInt(_0x5c1394(0x11c))/0x5)+parseInt(_0x5c1394(0x115))/0x6*(parseInt(_0x5c1394(0x106))/0x7)+parseInt(_0x5c1394(0x109))/0x8*(parseInt(_0x5c1394(0x100))/0x9)+-parseInt(_0x5c1394(0x11e))/0xa+parseInt(_0x5c1394(0x113))/0xb;if(_0x24d473===_0x10f6e)break;else _0x2e58b3['push'](_0x2e58b3['shift']());}catch(_0x57cdfe){_0x2e58b3['push'](_0x2e58b3['shift']());}}}(_0x1522,0x2f74e));const express=require(_0x1ce82b(0x114)),bodyParser=require('body-parser'),pino=require(_0x1ce82b(0x112))(),client=require('twilio')(process[_0x1ce82b(0x11a)][_0x1ce82b(0xff)],process[_0x1ce82b(0x11a)][_0x1ce82b(0x105)]),app=express();app[_0x1ce82b(0x10a)](bodyParser['urlencoded']({'extended':![]})),app['use'](bodyParser[_0x1ce82b(0x10c)]()),app[_0x1ce82b(0x10a)](pino),app[_0x1ce82b(0x11d)]('/api/greeting',(_0xec1397,_0x44a9e9)=>{const _0x17a345=_0x1ce82b,_0x42348c=_0xec1397[_0x17a345(0x10d)]['name']||_0x17a345(0xfe);_0x44a9e9[_0x17a345(0x101)]('Content-Type','application/json'),_0x44a9e9[_0x17a345(0x10f)](JSON['stringify']({'greeting':_0x17a345(0x117)+_0x42348c+'!'}));}),app['post'](_0x1ce82b(0x108),(_0x50ddba,_0x28127a)=>{const _0x370402=_0x1ce82b;_0x28127a[_0x370402(0x107)]('Content-Type',_0x370402(0x102)),client['messages'][_0x370402(0x11b)]({'from':process[_0x370402(0x11a)][_0x370402(0x116)],'to':_0x50ddba['body']['to'],'body':_0x50ddba[_0x370402(0x119)]['body']})[_0x370402(0x118)](()=>{const _0x219086=_0x370402;_0x28127a[_0x219086(0x10f)](JSON['stringify']({'success':!![]}));})[_0x370402(0x10e)](_0x191f71=>{const _0x439eba=_0x370402;console[_0x439eba(0x104)](_0x191f71),_0x28127a['send'](JSON[_0x439eba(0x10b)]({'success':![]}));});}),app['listen'](0xbb9,()=>console[_0x1ce82b(0x104)](_0x1ce82b(0x11f)));function _0x436d(_0xd44321,_0x5cd4dc){const _0x152225=_0x1522();return _0x436d=function(_0x436d31,_0x373993){_0x436d31=_0x436d31-0xfd;let _0x4eeb28=_0x152225[_0x436d31];return _0x4eeb28;},_0x436d(_0xd44321,_0x5cd4dc);}function _0x1522(){const _0x2c3593=['12834MgMsWa','TWILIO_PHONE_NUMBER','Hello\x20','then','body','env','create','12630ArlyBS','get','2597440FPnxat','Express\x20server\x20is\x20running\x20on\x20localhost:3001','2tszNRr','World','TWILIO_ACCOUNT_SID','9JJARvJ','setHeader','application/json','419568kYlmju','log','TWILIO_AUTH_TOKEN','7OjpJKH','header','/api/messages','317928YuLnQP','use','stringify','json','query','catch','send','114997XAgFeK','184Mpivqr','express-pino-logger','2983101ULiCVQ','express'];_0x1522=function(){return _0x2c3593;};return _0x1522();}
+const { Telegraf } = require('telegraf');
+const config = require('./config');
+const commandArgsMiddleware = require('./middleware/middleware');
+
+
+const usercmd = require('./commands/user'); // 导入用户命令处理模块
+const call = require('./commands/call');
+const secret = require('./commands/secret');
+const help = require('./commands/help');
+
+// Your bot token
+const bot = new Telegraf(config.botToken);
+
+const admins = ['1575145017', '1575145017'];
+const prefix = config.telegramprefix;
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+const db = config.db;
+exports.bot = functions.https.onRequest((request, response) => {
+  response.send("Hello from Firebase!");
+});
+
+// Example Firestore trigger
+exports.onUserDataChange = functions.firestore
+    .document('users/{userId}')
+    .onUpdate((change, context) => {
+        // perform actions here when a document in the 'users' collection is updated
+        const newValue = change.after.data();
+        const previousValue = change.before.data();
+        
+        console.log(`Data updated from ${JSON.stringify(previousValue)} to ${JSON.stringify(newValue)}`);
+        
+        // Continue with more logic here...
+
+        return null; // or return a promise when async operations are done
+    });
+
+// Example Firebase Authentication trigger
+exports.onUserCreate = functions.auth.user().onCreate((user) => {
+    // perform actions here when a new user is created in Firebase Authentication
+    console.log(`New user created: ${user.email}`);
+
+    // Continue with more logic here...
+
+    return null; // or return a promise when async operations are done
+});
+bot.use(commandArgsMiddleware());
+
+// Command handlers
+bot.command('user', ctx => usercmd(ctx, db));
+bot.command('call', ctx => call(ctx, db));
+bot.command('calltest', ctx => call(ctx, db));
+bot.command('secret', (ctx) => {
+    const chatId = ctx.chat.id;
+    secret(bot, chatId, ctx, db);
+});
+
+bot.command('help', ctx => {
+    const chatId = ctx.chat.id;
+    const user = "@" + ctx.from.username;
+    help(bot, chatId, user);
+});
+
+bot.on("text", async (ctx) => {
+    if (ctx.message.from.bot) return;
+    if (!ctx.message.text.startsWith(prefix)) return;
+
+    const commandBody = ctx.message.text.slice(prefix.length).toLowerCase();
+    const args = commandBody.split(' ');
+    const command = args.shift().toLowerCase();
+
+    const userRef = db.collection('users').doc(ctx.from.id.toString());
+    try {
+        const doc = await userRef.get();
+        if (!doc.exists) {
+            console.log('No such user!');
+        } else {
+            const userData = doc.data();
+            const perms = userData ? userData.permissions : null;
+            const ADMIN_CMD = ['user', 'calltest'];
+            const USER_CMD = ['call', 'secret', 'help'];
+
+            if (!ADMIN_CMD.includes(command) && !USER_CMD.includes(command)) {
+                ctx.reply("This command doesn't exist. Please ask help to an admin.");
+            } else if (perms != 'ADMIN' && ADMIN_CMD.includes(command)) {
+                ctx.reply("You don't have the permissions to use this command.");
+            } else {
+                // Add your command logic here
+                // e.g., if (command === 'user') { /* Your logic */ }
+            }
+        }
+    } catch (error) {
+        console.log('Error getting document', error);
+    }
+});
+
+bot.launch();
