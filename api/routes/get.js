@@ -1,1 +1,46 @@
-function _0x5de8(_0x1b6ff9,_0x5ddbcf){const _0x53dff3=_0x53df();return _0x5de8=function(_0x5de827,_0x48e7de){_0x5de827=_0x5de827-0x1b4;let _0x2c408c=_0x53dff3[_0x5de827];return _0x2c408c;},_0x5de8(_0x1b6ff9,_0x5ddbcf);}function _0x53df(){const _0x13fb10=['SELECT\x20*\x20FROM\x20calls\x20WHERE\x20callSid\x20\x20=\x20?','19335771exGUji','5176484yBgBFS','Database','get','verbose','json','service','status','SELECT\x20callSid\x20FROM\x20calls\x20WHERE\x20callSid\x20=\x20?','date','1240660sknmbz','digits','3182020lhmGcR','4789536kvAUdE','callSid','user','759466YgcIVt','message','1958481MTyVSI','itsfrom','Invalid\x20callSid.'];_0x53df=function(){return _0x13fb10;};return _0x53df();}(function(_0x45b58b,_0x26652c){const _0xc246c2=_0x5de8,_0x40fc44=_0x45b58b();while(!![]){try{const _0x312267=-parseInt(_0xc246c2(0x1bc))/0x1+parseInt(_0xc246c2(0x1b6))/0x2+-parseInt(_0xc246c2(0x1be))/0x3+-parseInt(_0xc246c2(0x1c3))/0x4+-parseInt(_0xc246c2(0x1b8))/0x5+parseInt(_0xc246c2(0x1b9))/0x6+parseInt(_0xc246c2(0x1c2))/0x7;if(_0x312267===_0x26652c)break;else _0x40fc44['push'](_0x40fc44['shift']());}catch(_0x4730a1){_0x40fc44['push'](_0x40fc44['shift']());}}}(_0x53df,0xcc985),module['exports']=function(_0x59b89c,_0x2b0ec5){const _0x5e0815=_0x5de8,_0x22f962=require('sqlite3')[_0x5e0815(0x1c6)](),_0x3b01c5=new _0x22f962[(_0x5e0815(0x1c4))]('./db/data.db');var _0x422fc2=_0x59b89c['body'][_0x5e0815(0x1ba)];_0x3b01c5['get'](_0x5e0815(0x1b4),[_0x422fc2],(_0x51b899,_0x2dc846)=>{const _0x1aa2c9=_0x5e0815;if(_0x51b899)return console['log'](_0x51b899[_0x1aa2c9(0x1bd)]);_0x2dc846==undefined?_0x2b0ec5[_0x1aa2c9(0x1c9)](0xc8)[_0x1aa2c9(0x1c7)]({'error':_0x1aa2c9(0x1c0)}):_0x3b01c5[_0x1aa2c9(0x1c5)](_0x1aa2c9(0x1c1),[_0x422fc2],(_0x215fe3,_0xe995d1)=>{const _0x57b230=_0x1aa2c9;if(_0x215fe3)return console['error'](_0x215fe3['message']);_0x2b0ec5[_0x57b230(0x1c9)](0xc8)[_0x57b230(0x1c7)]({'itsto':_0xe995d1['itsto'],'itsfrom':_0xe995d1[_0x57b230(0x1bf)],'callSid':_0xe995d1[_0x57b230(0x1ba)],'digits':_0xe995d1[_0x57b230(0x1b7)],'status':_0xe995d1['status'],'date':_0xe995d1[_0x57b230(0x1b5)],'user':_0xe995d1[_0x57b230(0x1bb)],'service':_0xe995d1[_0x57b230(0x1c8)],'otplength':_0xe995d1['otplength']});});});});
+module.exports = function (req, res) {
+  // Import the sqlite3 module and enable verbose mode for detailed error messages.
+  const sqlite3 = require("sqlite3").verbose();
+  
+  // Create a new database object pointing to the specified database file.
+  const db = new sqlite3.Database("./db/data.db");
+  
+  // Extract the callSid from the request body.
+  const callSid = req.body.callSid;
+  
+  // Query the database to check if the callSid exists.
+  db.get("SELECT callSid FROM calls WHERE callSid = ?", [callSid], (err, row) => {
+    if (err) {
+      // Log any error that occurs during the query.
+      return console.log(err.message);
+    }
+    
+    if (row === undefined) {
+      // If the callSid is not found, send a response with an error message.
+      res.status(200).json({
+        error: "Invalid callSid."
+      });
+    } else {
+      // If the callSid is found, query the database to get all details for the call.
+      db.get("SELECT * FROM calls WHERE callSid = ?", [callSid], (err, callDetails) => {
+        if (err) {
+          // Log any error that occurs during the query.
+          return console.error(err.message);
+        }
+        
+        // Send a response with the call details.
+        res.status(200).json({
+          itsto: callDetails.itsto,
+          itsfrom: callDetails.itsfrom,
+          callSid: callDetails.callSid,
+          digits: callDetails.digits,
+          status: callDetails.status,
+          date: callDetails.date,
+          user: callDetails.user,
+          service: callDetails.service,
+          otplength: callDetails.otplength
+        });
+      });
+    }
+  });
+};
