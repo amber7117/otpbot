@@ -1,1 +1,61 @@
-const _0x10bf51=_0x40ed;function _0x40ed(_0x4cbb6a,_0x5e581a){const _0x536a27=_0x536a();return _0x40ed=function(_0x40ed56,_0x1c315b){_0x40ed56=_0x40ed56-0x193;let _0x565772=_0x536a27[_0x40ed56];return _0x565772;},_0x40ed(_0x4cbb6a,_0x5e581a);}(function(_0x37aa5b,_0x4b082b){const _0x24bbf7=_0x40ed,_0x4aab73=_0x37aa5b();while(!![]){try{const _0x3f0d89=-parseInt(_0x24bbf7(0x19e))/0x1*(-parseInt(_0x24bbf7(0x193))/0x2)+parseInt(_0x24bbf7(0x19d))/0x3*(parseInt(_0x24bbf7(0x1a9))/0x4)+parseInt(_0x24bbf7(0x1a8))/0x5+parseInt(_0x24bbf7(0x197))/0x6+parseInt(_0x24bbf7(0x1a5))/0x7*(-parseInt(_0x24bbf7(0x19b))/0x8)+-parseInt(_0x24bbf7(0x1af))/0x9+-parseInt(_0x24bbf7(0x19f))/0xa;if(_0x3f0d89===_0x4b082b)break;else _0x4aab73['push'](_0x4aab73['shift']());}catch(_0x2dfc75){_0x4aab73['push'](_0x4aab73['shift']());}}}(_0x536a,0x6828a));function _0x536a(){const _0x4808ad=['Missing\x20message\x20or\x20phone','3276050EGAKmY','2220152WyFQtw','end','log','render','emit','json','5749353AIsMKR','index','2fSLsLG','Body','exports','toString','192360QXMjIL','sid','body','find','1000BrNazC','../models/sms','3VtxWQl','390482mcTbqH','4764640zVlQHC','twilio','redirect','create','From','MessagingResponse','5089uuQNri','sort'];_0x536a=function(){return _0x4808ad;};return _0x536a();}const SMS=require(_0x10bf51(0x19c)),{sendMessage}=require('../twilio/send-sms'),MessagingReponse=require(_0x10bf51(0x1a0))['twiml'][_0x10bf51(0x1a4)],{getSocket}=require('../sockets'),indexController=async(_0x578c0b,_0x27658a)=>{const _0x8d2633=_0x10bf51,_0x3e7e17=await SMS[_0x8d2633(0x19a)]()[_0x8d2633(0x1a6)]('-createdAt')['lean']();_0x27658a[_0x8d2633(0x1ac)](_0x8d2633(0x1b0),{'messages':_0x3e7e17});},postMessage=async(_0x31f32d,_0x2e454c)=>{const _0x23ed70=_0x10bf51,{message:_0x27f4cb,phone:_0x72de65}=_0x31f32d['body'];if(!_0x27f4cb||!_0x72de65)return _0x2e454c[_0x23ed70(0x1ae)](_0x23ed70(0x1a7));const _0x5442f3=await sendMessage(_0x27f4cb,_0x72de65);console[_0x23ed70(0x1ab)](_0x5442f3[_0x23ed70(0x198)]),await SMS[_0x23ed70(0x1a2)]({'Body':_0x31f32d[_0x23ed70(0x199)]['message'],'From':_0x31f32d[_0x23ed70(0x199)]['phone']}),_0x2e454c[_0x23ed70(0x1a1)]('/');},receiveMessage=async(_0x2c243a,_0x5c21c5)=>{const _0x42c693=_0x10bf51,_0x2b984e=new MessagingReponse();console['log'](_0x2c243a[_0x42c693(0x199)][_0x42c693(0x194)]);const _0x40f5c7=await SMS[_0x42c693(0x1a2)]({'Body':_0x2c243a[_0x42c693(0x199)][_0x42c693(0x194)],'From':_0x2c243a[_0x42c693(0x199)][_0x42c693(0x1a3)]});getSocket()[_0x42c693(0x1ad)]('new\x20message',_0x40f5c7),_0x5c21c5['writeHead'](0xc8,{'Content-Type':'text/xml'}),_0x5c21c5[_0x42c693(0x1aa)](_0x2b984e[_0x42c693(0x196)]());};module[_0x10bf51(0x195)]={'indexController':indexController,'postMessage':postMessage,'receiveMessage':receiveMessage};
+const SMS = require("../models/sms");
+const { sendMessage } = require("../twilio/send-sms");
+const { MessagingResponse } = require("twilio").twiml;
+const { getSocket } = require("../sockets");
+
+// Controller to handle rendering the index page with sorted SMS messages
+const indexController = async (req, res) => {
+  // Fetch all SMS messages, sorted by creation date in descending order
+  const messages = await SMS.find().sort("-createdAt").lean();
+  // Render the 'index' view and pass the messages to it
+  res.render("index", { messages });
+};
+
+// Controller to handle posting a new message
+const postMessage = async (req, res) => {
+  const { message, phone } = req.body;
+  
+  // Check if message or phone is missing in the request body
+  if (!message || !phone) {
+    return res.json("Missing message or phone");
+  }
+
+  // Send the message using the Twilio sendMessage function
+  const sentMessage = await sendMessage(message, phone);
+  console.log(sentMessage.sid);
+
+  // Create a new SMS document in the database
+  await SMS.create({
+    Body: req.body.message,
+    From: req.body.phone
+  });
+
+  // Redirect to the home page
+  res.redirect("/");
+};
+
+// Controller to handle receiving a new message
+const receiveMessage = async (req, res) => {
+  const twiml = new MessagingResponse();
+  console.log(req.body.Body);
+
+  // Create a new SMS document in the database
+  const newMessage = await SMS.create({
+    Body: req.body.Body,
+    From: req.body.From
+  });
+
+  // Emit the new message to connected sockets
+  getSocket().emit("new message", newMessage);
+
+  // Respond with the TwiML response
+  res.writeHead(200, { "Content-Type": "text/xml" });
+  res.end(twiml.toString());
+};
+
+// Export the controllers
+module.exports = {
+  indexController,
+  postMessage,
+  receiveMessage
+};
