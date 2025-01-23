@@ -8,23 +8,19 @@ module.exports = {
      */
     accountSid: '',   // Add your Twilio Account SID
     authToken: '',    // Add your Twilio Auth Token
-    callerid: '+',    // Add your Caller ID
+    callerid: '+1234567890',    // Add your Caller ID
 
     /**
      * Information about the API
      */
-    apipassword: '',  // Add your API password
-    serverurl: '',    // Add your server URL
+    apipassword: 'your_api_password',  // Add your API password
+    serverurl: 'https://yourserverurl.com',    // Add your server URL
 
     /**
-     * Information about the Discord webhook
+     * Information about the Telegram bot
      */
-    discordwebhook: '',  // Add your Discord webhook URL
-
-    /**
-     * Information about the Telegram webhook
-     */
-    telegramwebhook: '',  // Add your Telegram webhook URL
+    telegramToken: 'YOUR_TELEGRAM_BOT_TOKEN',   // Add your Telegram bot token
+    telegramChatId: 'YOUR_TELEGRAM_CHAT_ID',    // Add your Telegram chat ID
 
     /**
      * Port on which the Express server runs
