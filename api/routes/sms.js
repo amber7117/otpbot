@@ -1,1 +1,73 @@
-const _0x5d183d=_0x4dc4;function _0x3ba5(){const _0x1c7d5b=['then','exports','now','service','create','sms','2689755VBlDmi','../config','body','messages','4311008uJJbLx','287740lWFmkt','4194045XNMSRQ','4uXlowQ','match','3857uDPwzv','10047dipLXD','accountSid','25540500FJhPbz','json','896wGYeNU','user','The\x20service\x20wasn\x27t\x20recognised.','authToken','./db/data.db','send','sqlite3','Database','message','callerid','apipassword','Bad\x20phone\x20number\x20or\x20username\x20or\x20service.','3702pLkZTJ','verbose','/status/','status','Please\x20post\x20all\x20the\x20informations\x20needed.'];_0x3ba5=function(){return _0x1c7d5b;};return _0x3ba5();}function _0x4dc4(_0x143460,_0x57c2bb){const _0x3ba568=_0x3ba5();return _0x4dc4=function(_0x4dc486,_0x4f623c){_0x4dc486=_0x4dc486-0xa9;let _0x530788=_0x3ba568[_0x4dc486];return _0x530788;},_0x4dc4(_0x143460,_0x57c2bb);}(function(_0x1c0266,_0xbca401){const _0x1c9466=_0x4dc4,_0x26dbac=_0x1c0266();while(!![]){try{const _0x982dca=parseInt(_0x1c9466(0xa9))/0x1*(-parseInt(_0x1c9466(0xab))/0x2)+parseInt(_0x1c9466(0xae))/0x3*(-parseInt(_0x1c9466(0xb2))/0x4)+parseInt(_0x1c9466(0xc9))/0x5+parseInt(_0x1c9466(0xbe))/0x6*(-parseInt(_0x1c9466(0xad))/0x7)+-parseInt(_0x1c9466(0xcd))/0x8+-parseInt(_0x1c9466(0xaa))/0x9+parseInt(_0x1c9466(0xb0))/0xa;if(_0x982dca===_0xbca401)break;else _0x26dbac['push'](_0x26dbac['shift']());}catch(_0x2557d7){_0x26dbac['push'](_0x26dbac['shift']());}}}(_0x3ba5,0x66e79),module[_0x5d183d(0xc4)]=function(_0x3c0fd7,_0x4ebe25){const _0x1a0d3d=_0x5d183d,_0xeae0a0=require(_0x1a0d3d(0xb8))[_0x1a0d3d(0xbf)](),_0x3a2d07=new _0xeae0a0[(_0x1a0d3d(0xb9))](_0x1a0d3d(0xb6)),_0x115e53=require(_0x1a0d3d(0xca)),_0x4cd090=require('twilio')(_0x115e53[_0x1a0d3d(0xaf)],_0x115e53[_0x1a0d3d(0xb5)]);var _0x5daaae=_0x3c0fd7[_0x1a0d3d(0xcb)]['to']||null,_0x3b83f2=_0x3c0fd7['body'][_0x1a0d3d(0xb3)]||null,_0x3e8142=_0x3c0fd7[_0x1a0d3d(0xcb)][_0x1a0d3d(0xc6)]+_0x1a0d3d(0xc8);if(_0x5daaae==null||_0x3b83f2==null||_0x3e8142==null)return _0x4ebe25[_0x1a0d3d(0xc1)](0xc8)[_0x1a0d3d(0xb1)]({'error':_0x1a0d3d(0xc2)}),![];if(_0x115e53[_0x3e8142]==undefined)return _0x4ebe25[_0x1a0d3d(0xc1)](0xc8)[_0x1a0d3d(0xb1)]({'error':_0x1a0d3d(0xb4)}),![];_0x5daaae[_0x1a0d3d(0xac)](/^\d{8,14}$/g)&&!!_0x3b83f2&&!!_0x3e8142?_0x4cd090[_0x1a0d3d(0xcc)][_0x1a0d3d(0xc7)]({'body':_0x115e53[_0x3e8142],'from':_0x115e53[_0x1a0d3d(0xbb)],'statusCallback':_0x115e53['serverurl']+_0x1a0d3d(0xc0)+_0x115e53[_0x1a0d3d(0xbc)],'to':'+'+_0x5daaae})[_0x1a0d3d(0xc3)](_0x428fde=>{const _0x560f5c=_0x1a0d3d;smssid=_0x428fde['sid'],_0x4ebe25[_0x560f5c(0xc1)](0xc8)[_0x560f5c(0xb1)]({'smssid':smssid}),_0x4ebe25[_0x560f5c(0xb7)](smssid),_0x3a2d07['run']('INSERT\x20INTO\x20sms(smssid,\x20user,\x20itsfrom,\x20itsto,\x20content,\x20\x20service,\x20date)\x20VALUES(?,\x20?,\x20?,\x20?,\x20?,\x20?,\x20?)',[smssid,_0x3b83f2,_0x115e53['callerid'],_0x5daaae,_0x115e53[_0x3e8142],_0x3e8142,Date[_0x560f5c(0xc5)]()],function(_0x5a0475){const _0x2d8858=_0x560f5c;if(_0x5a0475)return console['log'](_0x5a0475[_0x2d8858(0xba)]);});}):_0x4ebe25[_0x1a0d3d(0xc1)](0xc8)[_0x1a0d3d(0xb1)]({'error':_0x1a0d3d(0xbd)});});
+module.exports = function (req, res) {
+  // Import the sqlite3 module and enable verbose mode for detailed error messages.
+  const sqlite3 = require("sqlite3").verbose();
+  
+  // Create a new database object pointing to the specified database file.
+  const db = new sqlite3.Database("./db/data.db");
+  
+  // Import the configuration file.
+  const config = require("../config");
+  
+  // Import the Twilio module and create a new client using accountSid and authToken from the config.
+  const twilioClient = require("twilio")(config.accountSid, config.authToken);
+  
+  // Extract the required parameters from the request body.
+  const to = req.body.to || null;
+  const user = req.body.user || null;
+  const service = req.body.service + "sms";
+  
+  // Check if all required parameters are provided.
+  if (to == null || user == null || service == null) {
+    res.status(200).json({
+      error: "Please post all the informations needed."
+    });
+    return false;
+  }
+  
+  // Check if the service is recognized in the configuration.
+  if (config[service] === undefined) {
+    res.status(200).json({
+      error: "The service wasn't recognised."
+    });
+    return false;
+  }
+  
+  // Validate the phone number format and ensure user and service are not null.
+  if (to.match(/^\d{8,14}$/g) && !!user && !!service) {
+    // Send the SMS using Twilio.
+    twilioClient.messages.create({
+      body: config[service],
+      from: config.callerid,
+      statusCallback: config.serverurl + "/status/" + config.apipassword,
+      to: "+" + to
+    }).then(message => {
+      const smssid = message.sid;
+      
+      // Send the SMS ID in the response.
+      res.status(200).json({
+        smssid: smssid
+      });
+      
+      // Insert the SMS details into the database.
+      db.run("INSERT INTO sms (smssid, user, itsfrom, itsto, content, service, date) VALUES (?, ?, ?, ?, ?, ?, ?)", 
+        [smssid, user, config.callerid, to, config[service], service, Date.now()], 
+        err => {
+          if (err) {
+            return console.log(err.message);
+          }
+        }
+      );
+    }).catch(err => {
+      // Handle any errors that occur during the SMS creation.
+      console.error(err.message);
+      res.status(500).json({
+        error: "Failed to send SMS."
+      });
+    });
+  } else {
+    // If phone number, user, or service is invalid, send an error response.
+    res.status(200).json({
+      error: "Bad phone number or username or service."
+    });
+  }
+};
