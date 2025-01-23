@@ -1,37 +1,48 @@
+const path = require('path');
+
 module.exports = {
     setupdone: 'true',
 
     /**
-     * Informations à propos du compte Twilio
+     * Information about the Twilio account
      */
-    accountSid: '',
-    authToken: '',
-	callerid: '+',
-    /**
-     * Informations à propos de l'API
-     */
-    apipassword: '',
-    serverurl: '',
+    accountSid: '',   // Add your Twilio Account SID
+    authToken: '',    // Add your Twilio Auth Token
+    callerid: '+',    // Add your Caller ID
 
     /**
-     * Informations à propos du webhook discord
+     * Information about the API
      */
-    discordwebhook: '',
+    apipassword: '',  // Add your API password
+    serverurl: '',    // Add your server URL
 
     /**
-     * Port sur lequel tourne le serveur express
+     * Information about the Discord webhook
+     */
+    discordwebhook: '',  // Add your Discord webhook URL
+
+    /**
+     * Information about the Telegram webhook
+     */
+    telegramwebhook: '',  // Add your Telegram webhook URL
+
+    /**
+     * Port on which the Express server runs
      */
     port: process.env.PORT || 80,
 
     /**
-     * Chemins de stockage des fichiers audios
+     * Paths for storing audio files
      */
-
-
-
+    audioFilePaths: {
+        welcome: path.join(__dirname, 'audio', 'welcome.mp3'),
+        error: path.join(__dirname, 'audio', 'error.mp3'),
+        notification: path.join(__dirname, 'audio', 'notification.mp3'),
+        // Add more audio files as needed
+    },
 
     /**
-     * Contenu des sms selon les services demandés
+     * Content of SMS based on requested services
      */
-    paypalsms: 'pp test 123'
+    paypalsms: 'pp test 123' // Customize SMS content as needed
 };
